@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using DemoApiEfCoreSwagger.Models.Entities;
+using DemoApiEfCoreSwagger.Models.InputModels;
 using DemoApiEfCoreSwagger.Models.Services.Application;
 using DemoApiEfCoreSwagger.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -24,12 +26,30 @@ namespace DemoApiEfCoreSwagger.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(ListViewModel<PersonaViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(200, Type=typeof(PersonaViewModel))]
         public async Task<IActionResult> GetList()
         {
             var persone = await personeService.GetPersoneAsync();
             return Ok(persone);
         }
-        
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] PersonaCreateInputModel inputModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    PersonaDetailViewModel persona = await personeService.CreatePersonaAsync(inputModel);
+                    return Ok(persona);
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+
+            return BadRequest();
+        }
     }
 }
