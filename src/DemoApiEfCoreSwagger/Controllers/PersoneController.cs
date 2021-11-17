@@ -23,7 +23,6 @@ namespace DemoApiEfCoreSwagger.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type=typeof(PersonaViewModel))]
         public async Task<IActionResult> GetList()
         {
             var persone = await personeService.GetPersoneAsync();
