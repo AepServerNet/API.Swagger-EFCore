@@ -1,4 +1,5 @@
 using System;
+using DemoApiEfCoreSwagger.Models.Services.Application;
 using DemoApiEfCoreSwagger.Models.Services.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,6 +50,8 @@ namespace DemoApiEfCoreSwagger
                 string connectionString = Configuration.GetSection("ConnectionStrings").GetValue<string>("Default");
                 optionsBuilder.UseSqlite(connectionString);
             });
+
+            services.AddTransient<IPersoneService, EfCorePersoneService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
