@@ -23,9 +23,12 @@ namespace DemoApiEfCoreSwagger
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddCors();
+
+            services.AddSwaggerGen(config =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { 
+                config.SwaggerDoc("v1", new OpenApiInfo 
+                { 
                     Title = "Demo API EfCore Swagger", 
                     Version = "v1",
                     Description = "API example that returns the current time",
@@ -60,14 +63,20 @@ namespace DemoApiEfCoreSwagger
             if (env.IsEnvironment("Development"))
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DemoApiEfCoreSwagger v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DemoApiEfCoreSwagger v1"));
 
             app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(
+                options => options.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            );
 
             app.UseEndpoints(endpoints =>
             {
