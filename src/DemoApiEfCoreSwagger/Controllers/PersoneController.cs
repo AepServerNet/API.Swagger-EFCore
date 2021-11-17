@@ -1,11 +1,8 @@
-using System.Collections.Generic;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using DemoApiEfCoreSwagger.Models.Entities;
 using DemoApiEfCoreSwagger.Models.InputModels;
 using DemoApiEfCoreSwagger.Models.Services.Application;
 using DemoApiEfCoreSwagger.Models.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -50,6 +47,34 @@ namespace DemoApiEfCoreSwagger.Controllers
             }
 
             return BadRequest();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Detail(int id)
+        {
+            try
+            {
+                PersonaDetailViewModel viewModel = await personeService.GetPersonaAsync(id);
+                return Ok(viewModel);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromBody] PersonaDeleteInputModel inputModel)
+        {
+            try
+            {
+                await personeService.DeletePersonaAsync(inputModel);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

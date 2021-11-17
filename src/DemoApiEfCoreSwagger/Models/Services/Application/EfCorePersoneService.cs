@@ -65,5 +65,35 @@ namespace DemoApiEfCoreSwagger.Models.Services.Application
 
             return PersonaDetailViewModel.FromEntity(persona);
         }
+
+        public async Task<PersonaDetailViewModel> GetPersonaAsync(int id)
+        {
+            IQueryable<PersonaDetailViewModel> queryLinq = dbContext.Persone
+                .AsNoTracking()
+                .Where(persona => persona.Id == id)
+                .Select(persona => PersonaDetailViewModel.FromEntity(persona));
+
+            PersonaDetailViewModel viewModel = await queryLinq.FirstOrDefaultAsync();
+
+            if (viewModel == null)
+            {
+                throw new Exception();
+            }
+
+            return viewModel;
+        }
+
+        public async Task DeletePersonaAsync(PersonaDeleteInputModel inputModel)
+        {
+            Persona persona = await dbContext.Persone.FindAsync(inputModel.Id);
+
+            if (persona == null)
+            {
+                throw new Exception();
+            }
+
+            dbContext.Remove(persona);
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

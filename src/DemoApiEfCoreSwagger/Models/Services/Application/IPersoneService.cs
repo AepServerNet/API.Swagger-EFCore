@@ -8,5 +8,7 @@ namespace DemoApiEfCoreSwagger.Models.Services.Application
     {
         Task<ListViewModel<PersonaViewModel>> GetPersoneAsync();
         Task<PersonaDetailViewModel> CreatePersonaAsync(PersonaCreateInputModel inputModel);
+        Task<PersonaDetailViewModel> GetPersonaAsync(int id);
+        Task DeletePersonaAsync(PersonaDeleteInputModel inputModel);
     }
 }
