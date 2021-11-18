@@ -37,29 +37,6 @@ namespace DemoApiEfCoreSwagger.Migrations
 
                     b.ToTable("Clienti");
                 });
-
-            modelBuilder.Entity("DemoApiEfCoreSwagger.Models.Entities.Persona", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Cognome")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Telefono")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Persone");
-                });
 #pragma warning restore 612, 618
         }
     }

@@ -2,7 +2,7 @@
 
 namespace DemoApiEfCoreSwagger.Migrations
 {
-    public partial class TabellaClienti : Migration
+    public partial class InitialMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

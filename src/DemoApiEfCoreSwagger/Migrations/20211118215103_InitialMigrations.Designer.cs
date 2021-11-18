@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoApiEfCoreSwagger.Migrations
 {
     [DbContext(typeof(MyDatabaseDbContext))]
-    [Migration("20211117141638_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20211118215103_InitialMigrations")]
+    partial class InitialMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,9 +17,9 @@ namespace DemoApiEfCoreSwagger.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.12");
 
-            modelBuilder.Entity("DemoApiEfCoreSwagger.Models.Entities.Persona", b =>
+            modelBuilder.Entity("DemoApiEfCoreSwagger.Models.Entities.Cliente", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ClienteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -35,9 +35,9 @@ namespace DemoApiEfCoreSwagger.Migrations
                     b.Property<string>("Telefono")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("ClienteId");
 
-                    b.ToTable("Persone");
+                    b.ToTable("Clienti");
                 });
 #pragma warning restore 612, 618
         }

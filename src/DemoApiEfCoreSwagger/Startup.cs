@@ -54,7 +54,7 @@ namespace DemoApiEfCoreSwagger
                 optionsBuilder.UseSqlite(connectionString);
             });
 
-            services.AddTransient<IPersoneService, EfCorePersoneService>();
+            services.AddTransient<ClientiDataAccessLayer>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

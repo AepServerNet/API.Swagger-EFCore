@@ -10,18 +10,11 @@ namespace DemoApiEfCoreSwagger.Models.Services.Infrastructure
 
         }
 
-        public virtual DbSet<Persona> Persone { get; set; }
         public virtual DbSet<Cliente> Clienti { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Persona>(entity => 
-            {
-                entity.ToTable("Persone");
-                entity.HasKey(persona => persona.Id);
-            });
 
             modelBuilder.Entity<Cliente>(entity => 
             {
