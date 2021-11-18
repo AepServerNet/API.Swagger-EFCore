@@ -2,14 +2,16 @@
 using DemoApiEfCoreSwagger.Models.Services.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DemoApiEfCoreSwagger.Migrations
 {
     [DbContext(typeof(MyDatabaseDbContext))]
-    partial class MyDatabaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211118212309_TabellaClienti")]
+    partial class TabellaClienti
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

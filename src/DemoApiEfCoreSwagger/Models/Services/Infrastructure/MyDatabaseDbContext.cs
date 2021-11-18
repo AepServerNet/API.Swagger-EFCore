@@ -11,6 +11,7 @@ namespace DemoApiEfCoreSwagger.Models.Services.Infrastructure
         }
 
         public virtual DbSet<Persona> Persone { get; set; }
+        public virtual DbSet<Cliente> Clienti { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,6 +21,12 @@ namespace DemoApiEfCoreSwagger.Models.Services.Infrastructure
             {
                 entity.ToTable("Persone");
                 entity.HasKey(persona => persona.Id);
+            });
+
+            modelBuilder.Entity<Cliente>(entity => 
+            {
+                entity.ToTable("Clienti");
+                entity.HasKey(cliente => cliente.ClienteId);
             });
         }
     }
