@@ -1,27 +1,19 @@
 using System.Collections.Generic;
-using System.Net.Mime;
 using DemoApiEfCoreSwagger.Models.Entities;
-using DemoApiEfCoreSwagger.Models.InputModels;
 using DemoApiEfCoreSwagger.Models.Services.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace DemoApiEfCoreSwagger.Controllers
 {
-    // [ApiController]
-    // [Produces(MediaTypeNames.Application.Json)]
-    // [Route("api/[controller]")]
     public class ClientiController : ControllerBase
     {
         private readonly ILogger<ClientiController> logger;
-        //private readonly IPersoneService personeService;
         private readonly ClientiDataAccessLayer objCliente;
 
-        //public ClientiController(ILogger<ClientiController> logger, IPersoneService personeService)
         public ClientiController(ILogger<ClientiController> logger, ClientiDataAccessLayer objCliente)
         {
             this.logger = logger;
-            //this.personeService = personeService;
             this.objCliente = objCliente;
         }
 
@@ -59,33 +51,5 @@ namespace DemoApiEfCoreSwagger.Controllers
         {  
             return objCliente.DeleteCliente(id);  
         }  
-
-        // [HttpGet]
-        // public JsonResult GetList()
-        // {
-        //     var persone = personeService.GetPersoneAsync();
-        //     return new JsonResult(persone);
-        // }
-
-        // [HttpPost]
-        // public JsonResult Create(PersonaCreateInputModel inputModel)
-        // {
-        //     personeService.CreatePersonaAsync(inputModel);
-        //     return new JsonResult("Persona aggiunta con successo !");
-        // }
-
-        // [HttpGet("{id}")]
-        // public JsonResult Detail(int id)
-        // {
-        //     var persona = personeService.GetPersonaAsync(id);
-        //     return new JsonResult(persona);
-        // }
-
-        // [HttpDelete("{id}")]
-        // public JsonResult Delete(PersonaDeleteInputModel inputModel)
-        // {
-        //     personeService.DeletePersonaAsync(inputModel);
-        //     return new JsonResult("Persona cancellata con successo !");
-        // }
     }
 }
