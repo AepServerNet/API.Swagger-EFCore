@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace DemoApiEfCoreSwagger
 {
@@ -19,11 +20,26 @@ namespace DemoApiEfCoreSwagger
         }
 
         public IConfiguration Configuration { get; }
+        private readonly string _policyName = "CorsPolicy";
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy(name: _policyName, builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000")
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+
             services.AddControllers();
-            services.AddCors();
 
             services.AddSwaggerGen(config =>
             {
@@ -71,11 +87,9 @@ namespace DemoApiEfCoreSwagger
             app.UseHttpsRedirection();
             app.UseRouting();
 
+            app.UseCors(_policyName);
             app.UseAuthorization();
-            app.UseCors(
-                options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
-            );
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
