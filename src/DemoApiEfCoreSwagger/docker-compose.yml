@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  demo-api:
+    container_name: demo-api
+    build: .
+    restart: always
+    volumes:
+      - /docker/demo-api/Data:/app/Data
+    ports: 
+      - 5180:80
+    networks:
+      - lan-network
+
+networks:
+   lan-network:
+      external:
+         name: docker-lan
